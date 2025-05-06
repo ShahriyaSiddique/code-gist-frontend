@@ -27,6 +27,16 @@
     margin-bottom: 1rem;
   }
 
+  .error-alert {
+    background-color: #ef44441a;
+    border: 1px solid #ef4444;
+    color: #ef4444;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+
   .form-group {
     margin-bottom: 1.25rem;
     width: 100%;
@@ -85,7 +95,7 @@
     .visibility-toggle {
       position: absolute;
       right: 0;
-      color: #666;
+      color: #94a3b8;
     }
   }
 

@@ -2,19 +2,25 @@
   <div class="register-form">
     <h1>Register</h1>
     <p class="subtitle">Create a new account to get started</p>
+
+    @if (error()) {
+      <div class="error-alert">
+        {{ error() }}
+      </div>
+    }
     
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="name">name</label>
         <input 
-          id="username"
+          id="name"
           type="text"
-          formControlName="username"
+          formControlName="name"
           placeholder="johndoe"
-          [class.error]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+          [class.error]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
         >
-        @if (registerForm.get('username')?.errors?.['required'] && registerForm.get('username')?.touched) {
-          <span class="error-message">Username is required</span>
+        @if (registerForm.get('name')?.errors?.['required'] && registerForm.get('name')?.touched) {
+          <span class="error-message">Name is required</span>
         }
       </div>
 
@@ -59,8 +65,12 @@
         }
       </div>
 
-      <button type="submit" class="register-btn" [disabled]="registerForm.invalid">
-        Register
+      <button type="submit" class="register-btn" [disabled]="registerForm.invalid || isLoading()">
+        @if (isLoading()) {
+          Loading...
+        } @else {
+          Register
+        }
       </button>
 
       <p class="signin-container">
