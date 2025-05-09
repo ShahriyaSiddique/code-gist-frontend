@@ -37,4 +37,8 @@ export class SnippetService {
       userIds: sharedWithId
     });
   }
+
+  getSharedSnippets() {
+    return this.http.get<ServerResponse<Snippet[]>>(`${this.apiUrl}/shared`);
+  }
 }

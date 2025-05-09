@@ -1,9 +1,11 @@
+import { User } from './auth.interfaces';
+
 export interface Snippet {
   id?: number;
   title: string;
   code: string;
   language: string;
-  userId?: number;
+  user?: User;
   createdAt?: Date;
   updatedAt?: Date;
 }

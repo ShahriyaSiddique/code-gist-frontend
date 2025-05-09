@@ -1,0 +1,32 @@
+<div class="snippets-container">
+  <div class="snippets-header">
+    <h1>Shared Snippets</h1>
+  </div>
+
+  @if (error()) {
+    <div class="error-alert">
+      {{ error() }}
+    </div>
+  }
+
+  @if (isLoading()) {
+    <div class="loading-spinner">
+      Loading snippets...
+    </div>
+  } @else {
+    @if (snippets().length === 0) {
+      <div class="no-snippets">
+        <p>No snippets have been shared with you yet.</p>
+      </div>
+    } @else {
+      <div class="snippets-grid">
+        @for (snippet of snippets(); track snippet.id) {
+          <app-snippet-card
+            [snippet]="snippet"
+            (edit)="onEdit($event)"
+          ></app-snippet-card>
+        }
+      </div>
+    }
+  }
+</div> 

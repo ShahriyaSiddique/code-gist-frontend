@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { User } from '../../../core/interfaces/auth.interfaces';
 import { Snippet } from '../../../core/interfaces/snippet.interfaces';
 import { ShareSnippetDialogComponent } from '../share-snippet-dialog/share-snippet-dialog.component';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-snippet-card',
@@ -34,11 +35,13 @@ export class SnippetCardComponent {
   @Output() edit = new EventEmitter<Snippet>();
 
   private dialog = inject(MatDialog);
+  private authService = inject(AuthService);
 
   users = signal<User[]>([]);
   selectedUserId = signal<string>('');
   isLoading = signal(false);
   error = signal<string | null>(null);
+  currentUser = this.authService.user();
 
   onShareClick(): void {
     const dialogRef = this.dialog.open(ShareSnippetDialogComponent, {
