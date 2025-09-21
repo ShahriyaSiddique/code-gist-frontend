@@ -11,26 +11,28 @@
   <mat-card-content>
     <pre class="code-preview">{{ snippet.code }}</pre>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button color="primary" (click)="edit.emit(snippet)">
-      <mat-icon>edit</mat-icon>
+  @if (actions) {
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="edit.emit(snippet)">
+        <mat-icon>edit</mat-icon>
+        @if (currentUser?.id === snippet.user?.id) {
+          Edit
+        } @else {
+          Contribute
+        }
+      </button>
       @if (currentUser?.id === snippet.user?.id) {
-        Edit
-      } @else {
-        Contribute
+        <button mat-button (click)="onShareClick()">
+          <mat-icon>share</mat-icon>
+          Share
+        </button>
       }
-    </button>
-    @if (currentUser?.id === snippet.user?.id) {
-      <button mat-button (click)="onShareClick()">
-        <mat-icon>share</mat-icon>
-        Share
-      </button>
-    }
-    @if (currentUser?.id === snippet.user?.id) {
-      <button mat-button>
-        <mat-icon>delete</mat-icon>
-        Delete
-      </button>
-    }
-  </mat-card-actions>
+      @if (currentUser?.id === snippet.user?.id) {
+        <button mat-button>
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
+      }
+    </mat-card-actions>
+  }
 </mat-card> 

@@ -129,6 +129,15 @@
   }
 }
 
+.no-snippets {
+  text-align: center;
+  padding: 3rem;
+  background-color: #1e293b;
+  border-radius: 0.5rem;
+  color: #94a3b8;
+  border: 1px solid #334155;
+}
+
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 1rem;

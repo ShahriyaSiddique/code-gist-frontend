@@ -32,6 +32,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class SnippetCardComponent {
   @Input() snippet!: Snippet;
+  @Input() actions = true;
   @Output() edit = new EventEmitter<Snippet>();
 
   private dialog = inject(MatDialog);
