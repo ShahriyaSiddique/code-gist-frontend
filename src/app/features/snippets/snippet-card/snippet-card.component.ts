@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { User } from '../../../core/interfaces/auth.interfaces';
 import { Snippet } from '../../../core/interfaces/snippet.interfaces';
 import { ShareSnippetDialogComponent } from '../share-snippet-dialog/share-snippet-dialog.component';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -34,6 +35,7 @@ export class SnippetCardComponent {
   @Input() snippet!: Snippet;
   @Input() actions = true;
   @Output() edit = new EventEmitter<Snippet>();
+  @Output() delete = new EventEmitter<Snippet>();
 
   private dialog = inject(MatDialog);
   private authService = inject(AuthService);
@@ -52,6 +54,24 @@ export class SnippetCardComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Snippet shared successfully');
+      }
+    });
+  }
+
+  onDeleteClick(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete snippet',
+        message: 'Delete this snippet? This cannot be undone.',
+        confirmLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        confirmWarn: true
+      },
+      panelClass: 'app-confirm-dialog'
+    });
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.delete.emit(this.snippet);
       }
     });
   }

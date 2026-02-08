@@ -14,6 +14,14 @@ body {
   box-sizing: border-box;
 }
 
+/* Confirm dialog: dark panel to match app background (#0f172a) */
+.app-confirm-dialog .mat-mdc-dialog-surface {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
 
 // @use '@angular/material' as mat;
 // @include mat.core();

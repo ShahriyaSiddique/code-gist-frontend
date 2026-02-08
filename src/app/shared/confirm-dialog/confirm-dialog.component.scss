@@ -1,0 +1,56 @@
+:host {
+  display: block;
+  min-width: 320px;
+  max-width: 420px;
+}
+
+h2.mat-mdc-dialog-title {
+  margin: 0;
+  padding: 1.25rem 1.5rem 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  letter-spacing: -0.01em;
+}
+
+.confirm-message {
+  margin: 0;
+  padding: 0 1.5rem 1.25rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  font-size: 0.9375rem;
+}
+
+::ng-deep .mat-mdc-dialog-content {
+  padding: 0;
+}
+
+::ng-deep .mat-mdc-dialog-actions {
+  padding: 1rem 1.5rem 1.25rem;
+  margin: 0;
+  border-top: 1px solid #334155;
+  gap: 0.75rem;
+  min-height: auto;
+
+  button {
+    min-width: 88px;
+
+    &.mat-warn {
+      background-color: #dc2626;
+      color: #fff;
+
+      &:hover {
+        background-color: #b91c1c;
+      }
+    }
+
+    &.mat-primary {
+      background-color: #3b82f6;
+      color: #fff;
+
+      &:hover {
+        background-color: #2563eb;
+      }
+    }
+  }
+}

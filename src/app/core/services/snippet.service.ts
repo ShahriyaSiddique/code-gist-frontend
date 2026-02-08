@@ -28,7 +28,7 @@ export class SnippetService {
     return this.http.patch<ServerResponse<Snippet>>(`${this.apiUrl}/${id}`, snippet);
   }
 
-  deleteSnippet(id: number): Observable<void> {
+  deleteSnippet(id: string | number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 

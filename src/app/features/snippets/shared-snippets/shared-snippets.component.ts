@@ -58,4 +58,12 @@ export class SharedSnippetsComponent implements OnInit {
       this.router.navigate(['/snippets', snippet.id, 'edit']);
     }
   }
+
+  onDelete(snippet: Snippet): void {
+    if (snippet.id == null) return;
+    this.snippetService.deleteSnippet(snippet.id).subscribe({
+      next: () => this.snippets.update(list => list.filter(s => s.id !== snippet.id)),
+      error: () => this.error.set('Failed to delete snippet')
+    });
+  }
 } 

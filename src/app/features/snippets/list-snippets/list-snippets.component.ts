@@ -59,6 +59,16 @@ export class ListSnippetsComponent implements OnInit {
     }
   }
 
+  onDelete(snippet: Snippet): void {
+    if (snippet.id == null) return;
+    this.snippetService.deleteSnippet(snippet.id).subscribe({
+      next: () => {
+        this.snippets.update(list => list.filter(s => s.id !== snippet.id));
+      },
+      error: () => this.error.set('Failed to delete snippet')
+    });
+  }
+
   onCreateNew(): void {
     this.router.navigate(['/snippets/create']);
   }
