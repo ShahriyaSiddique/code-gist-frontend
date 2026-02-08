@@ -44,6 +44,9 @@ export class UpdateSnippetComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private snippetService = inject(SnippetService);
   private authService = inject(AuthService);
+
+  /** Set from route so directive gets correct roomId before creating WebSocket provider. */
+  snippetId = this.route.snapshot.paramMap.get('id');
   
   isLoading = signal(false);
   error = signal<string | null>(null);
@@ -84,9 +87,6 @@ export class UpdateSnippetComponent implements OnInit {
       .subscribe({
         next: (snippet: Snippet) => {
           this.snippetForm.patchValue(snippet);
-          this.codeMirror.roomId = `snippet-${snippetId}`;
-          this.codeMirror.userName = this.currentUser().name;
-          this.codeMirror.userColor = this.currentUser().color;
         },
         error: (err) => {
           this.error.set('Failed to load snippet');

@@ -61,6 +61,9 @@
           <div 
             [appCodeMirror]="snippetForm.get('code')?.value || ''"
             [language]="snippetForm.get('language')?.value!"
+            [roomId]="'snippet-' + (snippetId ?? 'draft')"
+            [userName]="currentUser().name"
+            [userColor]="currentUser().color"
             (codeChange)="snippetForm.patchValue({ code: $event })"
             (usersChange)="onUsersChange($event)"
           ></div>
