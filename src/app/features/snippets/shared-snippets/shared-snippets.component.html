@@ -11,7 +11,7 @@
 
   @if (isLoading()) {
     <div class="loading-spinner">
-      Loading snippets...
+      <mat-spinner></mat-spinner>
     </div>
   } @else {
     @if (snippets().length === 0) {

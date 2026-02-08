@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Snippet } from '../../../core/interfaces/snippet.interfaces';
 import { SnippetService } from '../../../core/services/snippet.service';
 import { signal } from '@angular/core';
@@ -16,6 +17,7 @@ import { SnippetCardComponent } from '../snippet-card/snippet-card.component';
     CommonModule,
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     SnippetCardComponent
   ],
   templateUrl: './list-snippets.component.html',
