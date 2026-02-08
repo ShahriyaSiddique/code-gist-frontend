@@ -6,6 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { Snippet } from '../../../core/interfaces/snippet.interfaces';
@@ -16,6 +17,7 @@ import { CodeMirrorDirective } from '../../../shared/directives/codemirror.direc
 interface Collaborator {
   name: string;
   color: string;
+  isOnline?: boolean;
 }
 
 @Component({
@@ -29,6 +31,7 @@ interface Collaborator {
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatIconModule,
     CodeMirrorDirective
   ],
   templateUrl: './update-snippet.component.html',
@@ -71,6 +74,9 @@ export class UpdateSnippetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Set some demo collaborators
+    this.setDemoCollaborators();
+    
     const snippetId = this.route.snapshot.paramMap.get('id');
     if (snippetId) {
       this.snippetService.getSnippetById(snippetId)
@@ -89,8 +95,22 @@ export class UpdateSnippetComponent implements OnInit {
     }
   }
 
+  private setDemoCollaborators(): void {
+    const demoCollaborators: Collaborator[] = [
+      { name: 'Alice Johnson', color: '#8b5cf6', isOnline: true },
+      { name: 'Bob Smith', color: '#ec4899', isOnline: false },
+      { name: 'Carol Davis', color: '#14b8a6', isOnline: true }
+    ];
+    this.collaborators.set(demoCollaborators);
+  }
+
   onUsersChange(users: Collaborator[]) {
-    this.collaborators.set(users);
+    // Add isOnline status to collaborators for demo purposes
+    const collaboratorsWithStatus = users.map(user => ({
+      ...user,
+      isOnline: Math.random() > 0.3 // 70% chance of being online
+    }));
+    this.collaborators.set(collaboratorsWithStatus);
   }
 
   async onSubmit() {
