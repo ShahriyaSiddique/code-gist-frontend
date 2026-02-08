@@ -77,9 +77,6 @@ export class UpdateSnippetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Set some demo collaborators
-    this.setDemoCollaborators();
-    
     const snippetId = this.route.snapshot.paramMap.get('id');
     if (snippetId) {
       this.snippetService.getSnippetById(snippetId)
@@ -95,22 +92,10 @@ export class UpdateSnippetComponent implements OnInit {
     }
   }
 
-  private setDemoCollaborators(): void {
-    const demoCollaborators: Collaborator[] = [
-      { name: 'Alice Johnson', color: '#8b5cf6', isOnline: true },
-      { name: 'Bob Smith', color: '#ec4899', isOnline: false },
-      { name: 'Carol Davis', color: '#14b8a6', isOnline: true }
-    ];
-    this.collaborators.set(demoCollaborators);
-  }
-
-  onUsersChange(users: Collaborator[]) {
-    // Add isOnline status to collaborators for demo purposes
-    const collaboratorsWithStatus = users.map(user => ({
-      ...user,
-      isOnline: Math.random() > 0.3 // 70% chance of being online
-    }));
-    this.collaborators.set(collaboratorsWithStatus);
+  onUsersChange(users: Array<{ name: string; color: string }>) {
+    this.collaborators.set(
+      users.map(user => ({ ...user, isOnline: true }))
+    );
   }
 
   async onSubmit() {

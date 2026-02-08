@@ -33,27 +33,24 @@
         <div class="editor-header">
           <label>Code</label>
           <div class="editor-header-right">
-            <div class="collaborators">
-              <span class="collaborators-label">Collaborators:</span>
-              <div class="collaborators-list">
-                @for (user of collaborators(); track user.name) {
-                  <div class="collaborator" 
-                       [style.background-color]="user.color"
-                       [title]="user.name + (user.isOnline ? ' (Online)' : ' (Offline)')"
-                       [class.online]="user.isOnline">
-                    <div class="collaborator-avatar">
-                      {{ user.name[0].toUpperCase() }}
+            @if (collaborators().length > 0) {
+              <div class="collaborators">
+                <span class="collaborators-label">Collaborators:</span>
+                <div class="collaborators-list">
+                  @for (user of collaborators(); track user.name) {
+                    <div class="collaborator"
+                         [style.background-color]="user.color"
+                         [title]="user.name + (user.isOnline ? ' (Online)' : ' (Offline)')"
+                         [class.online]="user.isOnline">
+                      <div class="collaborator-avatar">
+                        {{ user.name[0].toUpperCase() }}
+                      </div>
+                      <div class="collaborator-status" [class.online]="user.isOnline"></div>
                     </div>
-                    <div class="collaborator-status" [class.online]="user.isOnline"></div>
-                  </div>
-                }
-                @if (collaborators().length < 5) {
-                  <button type="button" class="add-collaborator-btn" mat-icon-button>
-                    <mat-icon>person_add</mat-icon>
-                  </button>
-                }
+                  }
+                </div>
               </div>
-            </div>
+            }
             <button mat-stroked-button color="primary" type="button" [disabled]="!snippetForm.valid || isLoading()" (click)="codeMirror.formatCode()">Format Code</button>
           </div>
         </div>
