@@ -40,6 +40,7 @@
           <div 
             [appCodeMirror]="snippetForm.get('code')?.value || ''"
             [language]="snippetForm.get('language')?.value!"
+            [collaboration]="false"
             (codeChange)="snippetForm.patchValue({ code: $event })"
           ></div>
         </div>

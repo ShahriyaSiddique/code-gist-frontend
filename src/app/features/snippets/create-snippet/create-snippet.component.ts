@@ -1,4 +1,4 @@
-import { Component, inject, signal, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,12 +27,12 @@ import { SnippetService } from '../../../core/services/snippet.service';
   templateUrl: './create-snippet.component.html',
   styleUrls: ['./create-snippet.component.scss']
 })
-export class CreateSnippetComponent {
+export class CreateSnippetComponent implements OnInit {
   @ViewChild(CodeMirrorDirective) codeMirror!: CodeMirrorDirective;
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private snippetService = inject(SnippetService);
-  
+
   isLoading = signal(false);
   error = signal<string | null>(null);
 
@@ -50,6 +50,15 @@ export class CreateSnippetComponent {
     code: ['', [Validators.required]],
     isPublic: [false]
   });
+
+  ngOnInit(): void {
+    this.snippetForm.reset({
+      title: '',
+      language: 'javascript',
+      code: '',
+      isPublic: false
+    });
+  }
 
   async onSubmit() {
     if (this.snippetForm.valid) {
