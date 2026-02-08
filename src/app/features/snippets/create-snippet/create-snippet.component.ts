@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,6 +28,7 @@ import { SnippetService } from '../../../core/services/snippet.service';
   styleUrls: ['./create-snippet.component.scss']
 })
 export class CreateSnippetComponent {
+  @ViewChild(CodeMirrorDirective) codeMirror!: CodeMirrorDirective;
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private snippetService = inject(SnippetService);

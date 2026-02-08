@@ -27,14 +27,15 @@
             }
           </mat-select>
         </mat-form-field>
-
-        <div appearance="outline" class="checkbox-container">
-          <mat-checkbox formControlName="isPublic">Public Snippet</mat-checkbox>
-        </div>
       </div>
 
       <div class="code-editor-container" [class.error]="snippetForm.get('code')?.invalid && snippetForm.get('code')?.touched">
-        <label>Code</label>
+        <div class="editor-header">
+          <label>Code</label>
+          <div class="editor-header-right">
+            <button mat-stroked-button color="primary" type="button" [disabled]="!snippetForm.valid || isLoading()" (click)="codeMirror.formatCode()">Format Code</button>
+          </div>
+        </div>
         <div class="editor-wrapper">
           <div 
             [appCodeMirror]="snippetForm.get('code')?.value || ''"
@@ -45,15 +46,14 @@
         @if (snippetForm.get('code')?.errors?.['required'] && snippetForm.get('code')?.touched) {
           <span class="error-message">Code is required</span>
         }
+
+        <div class="checkbox-container">
+          <mat-checkbox formControlName="isPublic" color="primary">Make this snippet public</mat-checkbox>
+        </div>
       </div>
 
       <div class="form-actions">
-        <button 
-          mat-raised-button 
-          color="primary" 
-          type="submit"
-          [disabled]="!snippetForm.valid || isLoading()"
-        >
+        <button mat-raised-button color="primary" type="submit" [disabled]="!snippetForm.valid || isLoading()">
           @if (isLoading()) {
             Creating...
           } @else {

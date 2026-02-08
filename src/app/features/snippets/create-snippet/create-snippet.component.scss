@@ -111,12 +111,23 @@
   .code-editor-container {
     margin: 1.5rem 0;
 
-    label {
-      display: block;
-      color: #e2e8f0;
-      font-size: 0.875rem;
-      font-weight: 500;
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 0.5rem;
+
+      label {
+        color: #e2e8f0;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .editor-header-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
     }
 
     .editor-wrapper {
@@ -139,6 +150,10 @@
         bottom: 0;
         overflow: auto;
       }
+    }
+
+    .checkbox-container {
+      margin-top: 0.75rem;
     }
 
     &.error .editor-wrapper {
