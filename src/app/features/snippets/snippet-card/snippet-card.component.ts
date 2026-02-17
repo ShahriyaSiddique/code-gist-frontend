@@ -48,6 +48,7 @@ export class SnippetCardComponent {
   isLoading = signal(false);
   error = signal<string | null>(null);
   currentUser = this.authService.user();
+  copied = signal(false);
 
   onShareClick(): void {
     const dialogRef = this.dialog.open(ShareSnippetDialogComponent, {
@@ -59,6 +60,46 @@ export class SnippetCardComponent {
         console.log('Snippet shared successfully');
       }
     });
+  }
+
+  async onCopyClick(event: MouseEvent): Promise<void> {
+    event.stopPropagation();
+
+    const text = this.snippet?.code ?? '';
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        this.fallbackCopy(text);
+      }
+      this.copied.set(true);
+      window.setTimeout(() => this.copied.set(false), 1200);
+    } catch {
+      // Best-effort fallback for insecure contexts / permission issues
+      try {
+        this.fallbackCopy(text);
+        this.copied.set(true);
+        window.setTimeout(() => this.copied.set(false), 1200);
+      } catch {
+        // Intentionally silent (no global toast/snackbar in app yet)
+      }
+    }
+  }
+
+  private fallbackCopy(text: string): void {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.top = '0';
+    textarea.style.left = '0';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, textarea.value.length);
+    const ok = document.execCommand('copy');
+    document.body.removeChild(textarea);
+    if (!ok) throw new Error('Copy failed');
   }
 
   onDeleteClick(): void {

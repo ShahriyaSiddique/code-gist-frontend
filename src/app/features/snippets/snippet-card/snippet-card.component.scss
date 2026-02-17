@@ -1,6 +1,7 @@
 .snippet-card {
   height: 100%;
   display: flex;
+  position: relative;
 
   &.clickable {
     cursor: pointer;
@@ -73,5 +74,17 @@
     gap: 0.5rem;
     padding: 0.5rem;
     border-top: 1px solid #334155;
+  }
+
+  .copy-icon {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.35rem;
+    z-index: 2;
+    color: #cbd5e1;
+
+    &:hover {
+      color: #f8fafc;
+    }
   }
 } 

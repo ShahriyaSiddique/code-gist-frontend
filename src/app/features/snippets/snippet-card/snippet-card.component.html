@@ -3,6 +3,16 @@
   [class.clickable]="viewOnClick"
   (click)="viewOnClick && view.emit(snippet)"
 >
+  <button
+    mat-icon-button
+    type="button"
+    class="copy-icon"
+    (click)="onCopyClick($event)"
+    [attr.aria-label]="copied() ? 'Copied' : 'Copy code'"
+  >
+    <mat-icon>{{ copied() ? 'check' : 'content_copy' }}</mat-icon>
+  </button>
+
   <mat-card-header>
     <mat-card-title>{{ snippet.title }}</mat-card-title>
     <mat-card-subtitle>
